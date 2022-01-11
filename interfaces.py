@@ -8,6 +8,7 @@ import win32com.client as win32
 class SldWorks:
     def __init__(self):
         self._isldworks = Com('SldWorks.Application')
+        self._isldworks.Visible = True
 
     @property
     def active_doc(self):
@@ -110,10 +111,11 @@ class CustomPropertyManager:
         # todo get field type from field value entered
         self._instance.Add3(field_name, field_type, field_value, overwrite_existing)
 
-    def delete(self):
-        pass  # todo
+    def delete(self, field_name):
+        self._instance.Delete2(field_name)
 
     def get(self, field_name, use_cached=False):
+        # todo format returned values
         arg1 = win32.VARIANT(pythoncom.VT_BSTR, field_name)
         arg2 = win32.VARIANT(pythoncom.VT_BOOL, use_cached)
         arg3 = win32.VARIANT(pythoncom.VT_BSTR | pythoncom.VT_BYREF, None)
@@ -135,3 +137,10 @@ class CustomPropertyManager:
 
     def get_names(self):
         return self._instance.GetNames
+
+    def get_type(self, field_name):
+        return CustomInfoType(self._instance.GetType2(field_name))
+
+    def set(self, field_name, field_value):
+        self._instance.Set2(field_name, field_value)
+
