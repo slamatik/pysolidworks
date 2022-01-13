@@ -12,6 +12,14 @@ class ICustomPropertyManager:
         return self._instance.Count
 
     @property
+    def link(self):
+        return self._instance.LinkAll
+
+    @link.setter
+    def link(self, state):
+        self._instance.LinkAll = state
+
+    @property
     def owner(self):
         return self._instance.Owner
 
