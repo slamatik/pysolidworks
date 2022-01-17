@@ -2,6 +2,7 @@ from api.assemblydoc import AssemblyDoc
 from api.drawingdoc import DrawingDoc
 from api.partdoc import PartDoc
 from enums import DocumentTypes
+from com import Com
 
 
 class Doc:
@@ -13,7 +14,7 @@ class Doc:
         @property
         def _instance(self):
             if self.system_object is None:
-                self.system_object = COM("SldWorks.Application").ActiveDoc
+                self.system_object = Com("SldWorks.Application").ActiveDoc
             return self.system_object
 
         @property

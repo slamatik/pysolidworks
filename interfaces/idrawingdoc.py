@@ -1,16 +1,11 @@
 from interfaces.isheet import ISheet
 
 
+# http://help.solidworks.com/2021/english/api/sldworksapi/SolidWorks.Interop.sldworks~SolidWorks.Interop.sldworks.IDrawingDoc.html
+
 class IDrawingDoc:
     def __init__(self, system_object):
         self.system_object = system_object
-
-    #
-    # def __str__(self):
-    #     return f'{__class__.__name__} asd'
-    #
-    # def __repr__(self):
-    #     return f'{__class__.__name__} 123'
 
     @property
     def _instance(self):
@@ -21,8 +16,6 @@ class IDrawingDoc:
         return self._instance.ActiveDrawingView
 
     def get_current_sheet(self):
-        # todo return isheet
-        # return self._instance.GetCurrentSheet
         return ISheet(self._instance)
 
     def activate_view(self, view_name):

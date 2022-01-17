@@ -2,10 +2,14 @@ from interfaces.irevisiontableannotation import IRevisionTableAnnotation
 from interfaces.ititleblock import ITitleBlock
 from interfaces.itableanchor import ITableAnchor
 from interfaces.ipagesetup import IPageSetup
+from interfaces.isketch import ISketch
+from interfaces.iview import IView
 from enums import TableAnnotation
 import win32com.client as win32
 import pythoncom
 
+
+# http://help.solidworks.com/2021/english/api/sldworksapi/SOLIDWORKS.Interop.sldworks~SOLIDWORKS.Interop.sldworks.ISheet.html
 
 class ISheet:
     def __init__(self, parent=None):
@@ -13,14 +17,11 @@ class ISheet:
 
     def page_setup(self):
         return IPageSetup(self._instance)
-        # pass  # todo IPageSetup
-        # return self._instance.PageSetup
 
     def revision_table(self):
         return IRevisionTableAnnotation(self._instance)
 
     def table_anchor(self, table_type):
-        # todo
         return ITableAnchor(self._instance, table_type)
 
     def title_block(self):
@@ -48,12 +49,10 @@ class ISheet:
 
     @property
     def get_size(self):
-        # todo
-        x, y = float(), float()
-        # x = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I8, None)
-        # y = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I8, None)
-        data = self._instance.GetSize(x, y)
-        return data
+        width = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_R8, None)
+        height = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_R8, None)
+        self._instance.GetSize(width, height)
+        return width.value, height.value
 
     @property
     def get_template_name(self):
@@ -61,12 +60,10 @@ class ISheet:
 
     @property
     def get_template_sketch(self):
-        # todo ISketch
-        return self._instance.GetTemplateSketch
+        return ISketch(self._instance.GetTemplateSketch)
 
     def get_views(self):
-        # todo [IView]
-        return self._instance.GetViews
+        return [IView(i) for i in self._instance.GetViews]
 
     def set_name(self, name):
         self._instance.SetName(name)

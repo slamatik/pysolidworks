@@ -5,11 +5,12 @@ import win32com.client as win32
 import pythoncom
 import os
 
+# http://help.solidworks.com/2021/english/api/sldworksapi/SolidWorks.Interop.sldworks~SolidWorks.Interop.sldworks.ISldWorks.html
 
 class ISldWorks:
     def __init__(self):
         self._isldworks = Com('SldWorks.Application')
-        self._isldworks.Visible = True
+        # self._isldworks.Visible = True
 
     @property
     def active_doc(self):
@@ -67,3 +68,6 @@ class ISldWorks:
 
     def get_model(self):
         return IModelDoc()
+
+    def quit_doc(self, name):
+        self._isldworks.QuitDoc(name)

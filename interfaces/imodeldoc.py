@@ -1,7 +1,12 @@
 from com import Com
-from .iconfigurationmanager import ConfigurationManager
+from .iconfigurationmanager import IConfigurationManager
 from .imodeldocextension import IModelDocExtension
+from .ifeaturemanager import IFeatureManager
+import win32com.client as win32
+import pythoncom
 
+
+# http://help.solidworks.com/2021/english/api/sldworksapi/SolidWorks.Interop.sldworks~SolidWorks.Interop.sldworks.IModelDoc2.html
 
 class IModelDoc:
     def __init__(self, parent=None):
@@ -15,7 +20,7 @@ class IModelDoc:
 
     @property
     def configuration_manager(self):
-        return ConfigurationManager(self._instance())
+        return IConfigurationManager(self._instance())
 
     @property
     def extension(self):
@@ -23,8 +28,7 @@ class IModelDoc:
 
     @property
     def feature_manager(self):
-        # return FeatureManager(self._instance())
-        pass
+        return IFeatureManager(self._instance())
 
     @property
     def length_unit(self):
@@ -35,3 +39,10 @@ class IModelDoc:
 
     def get_title(self):
         return self._instance().GetTitle
+
+    def save(self, options=1):
+        arg1 = win32.VARIANT(pythoncom.VT_I4, options)
+        arg2 = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
+        arg3 = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
+        self._instance().Save3(arg1, arg2, arg3)
+        return arg2.value, arg3.value

@@ -1,9 +1,12 @@
+import pandas as pd
+
 from interfaces.isldworks import ISldWorks
 from doc import Doc
 import win32com.client as win32
 from interfaces.imodeldoc import IModelDoc
 import os
 import pythoncom
+import numpy as np
 
 
 class SldWorks(ISldWorks):
@@ -38,3 +41,27 @@ class SldWorks(ISldWorks):
 
     def get_model(self):
         return IModelDoc()
+
+    """CUSTOM FUNCTIONS"""
+
+    def export_custom_properties(self, folder=None, file_name=None):
+        folder = folder if folder else input()
+        file_name = file_name if file_name else input()
+        df = pd.DataFrame()
+        for file in os.listdir(folder):
+            if file.endswith('.SLDDRW'):
+                path = os.path.join(folder, file)
+                part_number = file.split('.')[0]
+                # print(path)
+                drawing = self.open_doc(path)
+                model = self.get_model()
+                model_doc_extension = model.extension
+                custom_property_manager = model_doc_extension.custom_property_manager('')
+                properties = np.array(custom_property_manager.get_all())
+                names, values = ['Part Number'] + list(properties[:, 0]), [part_number] + list(properties[:, 2])
+                df = df.append({key: value for key, value in zip(names, values)}, ignore_index=True)
+                self.quit_doc(path)
+        df.to_csv(file_name + '.csv')
+
+    def get_from_excel(self):
+        pass

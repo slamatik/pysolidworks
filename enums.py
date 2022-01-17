@@ -1,6 +1,16 @@
 from enum import Enum
 
 
+class CEnum(Enum):
+    def __str__(self):
+        return self.name.split("_")[1]
+
+
+class CEnum2(Enum):
+    def __str__(self):
+        return self.name
+
+
 class ApplicationType(Enum):
     EXPERIENCE3D = 1
     DESKTOP = 0
@@ -21,11 +31,11 @@ class CustomPropertyAddOption(Enum):
     REPLACE_VALUE = 2
 
 
-class CustomInfoAddResult(Enum):
-    ADDED_OR_CHANGED = 0
-    GENERIC_FAIL = 1
-    MISMATCH_AGAINST_EXISTING_TYPE = 2
-    MISMATCH_AGAINSTE_SPECIFIC_TYPE = 3
+class CustomInfoAddResult(CEnum):
+    swCustomInfoAddResult_AddedOrChanged = 0
+    swCustomInfoAddResult_GenericFail = 1
+    swCustomInfoAddResult_MismatchAgainstExistingType = 2
+    swCustomInfoAddResult_MismatchAgainstSpecifiedType = 3
 
 
 class CustomInfoDeleteResult(Enum):
@@ -34,7 +44,7 @@ class CustomInfoDeleteResult(Enum):
     OK = 0
 
 
-class CustomInfoGetResult(Enum):
+class CustomInfoGetResult(CEnum2):
     CACHED_VALUE = 0
     NOT_PRESENT = 1
     RESOLVED_VALUE = 2
@@ -54,13 +64,19 @@ class CustomLinkSetResult(Enum):
     USER_PROP = 3
 
 
-class CustomInfoType(Enum):
+class CustomInfoType(CEnum2):
     DATE = 64
     DOUBLE = 5
     NUMBER = 3
     TEXT = 30
     UNKNOWN = 0
     YES_OR_NO = 11
+
+    # def __str__(self):
+    #     return self.name
+    #
+    # def __repr__(self):
+    #     return str(self.name)
 
 
 class DocumentTypes(Enum):
@@ -180,7 +196,7 @@ class SaveAsOptions(Enum):
     UPDATE_INACTIVE_VIEWS = 16
 
 
-class TableAnnotation(Enum):
+class TableAnnotation(CEnum):
     TABLEANNOTATION_BendTable = 7
     TABLEANNOTATION_BillOfMaterials = 2
     TABLEANNOTATION_General = 0
@@ -191,3 +207,9 @@ class TableAnnotation(Enum):
     TABLEANNOTATION_TitleBlock = 5
     TABLEANNOTATION_WeldmentCutList = 4
     TABLEANNOTATION_WeldTable = 6
+
+
+class VisibilityState(Enum):
+    swVisibilityStateHide = 1
+    swVisibilityStateShown = 2
+    swVisibilityStateUnknown = 3

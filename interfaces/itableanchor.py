@@ -1,3 +1,9 @@
+from enums import TableAnnotation
+from interfaces.ifeature import IFeature
+
+
+# http://help.solidworks.com/2021/english/api/sldworksapi/SolidWorks.Interop.sldworks~SolidWorks.Interop.sldworks.ITableAnchor.html
+
 class ITableAnchor:
     def __init__(self, parent, table_type):
         self._instance = parent.TableAnchor(table_type)
@@ -8,9 +14,7 @@ class ITableAnchor:
 
     @property
     def type(self):
-        # todo type
-        return self._instance.Type
+        return TableAnnotation(self._instance.Type)
 
     def get_feature(self):
-        # todo IFeature
-        return self._instance.GetFeature
+        return IFeature(self._instance)
