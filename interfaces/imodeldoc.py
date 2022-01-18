@@ -10,32 +10,26 @@ import pythoncom
 
 class IModelDoc:
     def __init__(self, parent=None):
-        self.parent = parent
-
-    def _instance(self):
-        if self.parent is not None:
-            return self.parent
-        else:
-            return Com('SldWorks.Application').ActiveDoc
+        self._instance = parent
 
     @property
     def configuration_manager(self):
-        return IConfigurationManager(self._instance())
+        return IConfigurationManager(self._instance)
 
     @property
     def extension(self):
-        return IModelDocExtension(self._instance())
+        return IModelDocExtension(self._instance)
 
     @property
     def feature_manager(self):
-        return IFeatureManager(self._instance())
+        return IFeatureManager(self._instance)
 
     @property
     def length_unit(self):
-        return self._instance().LengthUnit
+        return self._instance.LengthUnit
 
     def get_path_name(self):
-        return self._instance().GetPathName
+        return self._instance.GetPathName
 
     def get_title(self):
         return self._instance().GetTitle
@@ -46,3 +40,8 @@ class IModelDoc:
         arg3 = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
         self._instance().Save3(arg1, arg2, arg3)
         return arg2.value, arg3.value
+
+    def force_rebuild(self, top_only=False):
+        arg1 = win32.VARIANT(pythoncom.VT_BOOL, top_only)
+        return self._instance.ForceRebuild3(arg1)
+        # return self._instance().ForceRebuild3(arg1)

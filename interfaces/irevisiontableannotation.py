@@ -1,16 +1,19 @@
 # http://help.solidworks.com/2021/english/api/sldworksapi/SOLIDWORKS.Interop.sldworks~SOLIDWORKS.Interop.sldworks.IRevisionTableAnnotation.html
+from interfaces.irevisiontablefeature import IRevisionTableFeature
+import interfaces.itableannotation
 
-class IRevisionTableAnnotation:
-    def __init__(self, parent=None):
-        self._instance = parent.RevisionTable
+
+class IRevisionTableAnnotation(interfaces.itableannotation.ITableAnnotation):
+    def __init__(self, parent):
+        super().__init__(parent)
 
     @property
     def current_revision(self):
         return self._instance.CurrentRevision
 
-    # @property
-    # def revision_table_features(self):
-    #     return self._instance.RevisionTableFeature
+    @property
+    def revision_table_features(self):
+        return IRevisionTableFeature(self._instance.RevisionTableFeature)
 
     def add_revision(self, revision):
         return self._instance.AddRevision(revision)

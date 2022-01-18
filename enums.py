@@ -90,6 +90,22 @@ class DocumentTypes(Enum):
     SDM = 4
 
 
+class DwgPaperSizes:
+    swDwgPaperA0size = 11
+    swDwgPaperA1size = 10
+    swDwgPaperA2size = 9
+    swDwgPaperA3size = 8
+    swDwgPaperA4size = 6
+    swDwgPaperA4sizeVertical = 7
+    swDwgPaperAsize = 0
+    swDwgPaperAsizeVertical = 1
+    swDwgPaperBsize = 2
+    swDwgPaperCsize = 3
+    swDwgPaperDsize = 4
+    swDwgPaperEsize = 5
+    swDwgPapersUserDefined = 12
+
+
 class FileSaveError(Enum):
     FILE_LOCK_ERROR = 16
     FILE_NAME_CONTAINS_AT_SIGN = 8
