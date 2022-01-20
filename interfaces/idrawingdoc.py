@@ -15,7 +15,7 @@ class IDrawingDoc:
     def active_drawing_view(self):
         return self._instance.ActiveDrawingView
 
-    def sheet(self, name):
+    def sheet(self, name='Sheet1'):
         return ISheet(self._instance.Sheet(name))
 
     def get_current_sheet(self):

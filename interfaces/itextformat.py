@@ -1,3 +1,5 @@
+import win32com.client as win32
+
 class ITextFormat:
     def __init__(self, parent):
         self._instance = parent
@@ -25,3 +27,6 @@ class ITextFormat:
     @type_face_name.setter
     def type_face_name(self, value):
         self._instance.TypeFaceName = value
+
+    # def GetTypeInfo(self):
+    #     return 'S_OK'

@@ -14,7 +14,7 @@ class SldWorks(ISldWorks):
         super().__init__()
 
     def close_doc(self, name):
-        self._isldworks.CloseDoc(name)
+        self._instance.CloseDoc(name)
 
     def open_doc(self, file_name, options=1, configuration=str()):
         extension = os.path.splitext(file_name)[1]
@@ -33,11 +33,11 @@ class SldWorks(ISldWorks):
         arg4 = win32.VARIANT(pythoncom.VT_BSTR, configuration)
         arg5 = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
         arg6 = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
-        pointer = self._isldworks.OpenDoc6(arg1, arg2, arg3, arg4, arg5, arg6)
+        pointer = self._instance.OpenDoc6(arg1, arg2, arg3, arg4, arg5, arg6)
         return Doc(pointer), arg5.value, arg6.value
 
     def get_configuration_names(self, file_path_name):
-        return self._isldworks.GetConfigurationNames(file_path_name)
+        return self._instance.GetConfigurationNames(file_path_name)
 
     def get_model(self):
         return IModelDoc()
@@ -65,3 +65,15 @@ class SldWorks(ISldWorks):
 
     def get_from_excel(self):
         pass
+
+        # for file in os.listdir(folder):
+        #     if file.endswith('SLDDRW'):
+        #         path = os.path.join(folder, file)
+        #         part_number = file.split('.')[0]
+        #         drawing = sw.open_doc(path)
+        #         model = sw.get_model()
+        #         model_doc_extension = model.extension
+        #         custom_property_manager = model_doc_extension.custom_property_manager('')
+        #         description = df[df['Part Number'] == int(part_number)]['Description'].values[0]
+        #         custom_property_manager.set('Description', str(description))
+        #         model.save()
