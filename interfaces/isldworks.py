@@ -65,10 +65,10 @@ class ISldWorks:
         # return self._instance.AddFileSaveAsItem2
         raise NotImplemented
 
-    def add_item_to_third_party_popup_menu(self):
-        """Adds menu items to a pop-up (shortcut) menu in a C++ SOLIDWORKS add-in."""
-        # return self._instance.AddItemToThirdPartyPopupMenu
-        raise NotImplemented
+    # def add_item_to_third_party_popup_menu(self):
+    #     """Adds menu items to a pop-up (shortcut) menu in a C++ SOLIDWORKS add-in."""
+    #     # return self._instance.AddItemToThirdPartyPopupMenu
+    #     raise NotImplemented
 
     def add_item_to_third_party_popup_menu(self):
         """Adds menu items to a pop-up (shortcut) menu in a SOLIDWORKS add-in."""
@@ -85,13 +85,15 @@ class ISldWorks:
         # return self._instance.AddMenuItem5
         raise NotImplemented
 
-    def add_menu_popup_item(self):
-        """Adds a menu item and zero or more submenus to shortcut menus of entities of the specified type in documents of the specified type."""
-        # return self._instance.AddMenuPopupItem3
-        raise NotImplemented
+    # def add_menu_popup_item(self):
+    #     """Adds a menu item and zero or more submenus to shortcut menus of entities of the specified type in documents
+    #     of the specified type."""
+    #     # return self._instance.AddMenuPopupItem3
+    #     raise NotImplemented
 
     def add_menu_popup_item(self):
-        """Adds a menu item and zero or more submenus to shortcut menus of features of the specified type in documents of the specified type."""
+        """Adds a menu item and zero or more submenus to shortcut menus of features of the specified type in documents
+        of the specified type."""
         # return self._instance.AddMenuPopupItem4
         raise NotImplemented
 
@@ -126,12 +128,14 @@ class ISldWorks:
         raise NotImplemented
 
     def call_back(self):
-        """Allows an out-of-process executable or a SOLIDWORKS macro to call back a function in a SOLIDWORKS add-in DLL."""
+        """Allows an out-of-process executable or a SOLIDWORKS macro to call back a function in a SOLIDWORKS add-in
+        DLL."""
         # return self._instance.CallBack
         raise NotImplemented
 
     def checkpoint_converted_document(self):
-        """Saves the specified open document if its version is older than the version of the SOLIDWORKS product being used."""
+        """Saves the specified open document if its version is older than the version of the SOLIDWORKS product being
+        used."""
         # return self._instance.CheckpointConvertedDocument
         raise NotImplemented
 
@@ -200,7 +204,8 @@ class ISldWorks:
         raise NotImplemented
 
     def drag_toolbar_button(self):
-        """Copies the specified toolbar button from the specified native SOLIDWORKS toolbar or ICommandGroup toolbar to the specified native SOLIDWORKS toolbar or ICommandGroup toolbar."""
+        """Copies the specified toolbar button from the specified native SOLIDWORKS toolbar or ICommandGroup toolbar
+        to the specified native SOLIDWORKS toolbar or ICommandGroup toolbar."""
         # return self._instance.DragToolbarButton
         raise NotImplemented
 
@@ -479,7 +484,8 @@ class ISldWorks:
         raise NotImplemented
 
     def get_opened_file_info(self):
-        """Gets the name of the last model successfully opened by SOLIDWORKS and the options that were in effect when it opened."""
+        """Gets the name of the last model successfully opened by SOLIDWORKS and the options that were in effect when
+        it opened."""
         # return self._instance.GetOpenedFileInfo
         raise NotImplemented
 
@@ -489,12 +495,14 @@ class ISldWorks:
         raise NotImplemented
 
     def get_preview_bitmap(self):
-        """Gets the preview bitmap (.bmp) for the specified configuration, regardless if the SOLIDWORKS document is open or closed."""
+        """Gets the preview bitmap (.bmp) for the specified configuration, regardless if the SOLIDWORKS document is
+        open or closed."""
         # return self._instance.GetPreviewBitmap
         raise NotImplemented
 
     def get_preview_bitmap_file(self):
-        """Gets the specified preview bitmap of a document and saves it as a Windows bitmap file (.bmp) using the specified filename."""
+        """Gets the specified preview bitmap of a document and saves it as a Windows bitmap file (.bmp) using the
+        specified filename."""
         # return self._instance.GetPreviewBitmapFile
         raise NotImplemented
 
@@ -519,7 +527,8 @@ class ISldWorks:
         raise NotImplemented
 
     def get_running_command_info(self):
-        """Get a command's ID or PropertyManager page's command ID, title, and whether it is active in the user-interface."""
+        """Get a command's ID or PropertyManager page's command ID, title, and whether it is active in the
+        user-interface."""
         # return self._instance.GetRunningCommandInfo
         raise NotImplemented
 
@@ -534,7 +543,8 @@ class ISldWorks:
         raise NotImplemented
 
     def get_search_folders(self):
-        """Gets the current folder search path as shown in Tools > Options > System Options > File Locations > Show folders for > Referenced Documents."""
+        """Gets the current folder search path as shown in Tools > Options > System Options > File Locations > Show
+        folders for > Referenced Documents."""
         # return self._instance.GetSearchFolders
         raise NotImplemented
 
@@ -685,7 +695,8 @@ class ISldWorks:
         raise NotImplemented
 
     def preset_new_drawing_parameters(self):
-        """Presets the drawing template and sheet size parameters to avoid showing the Sheet Format/Size dialog when creating a new drawing document in the user-interface."""
+        """Presets the drawing template and sheet size parameters to avoid showing the Sheet Format/Size dialog when
+        creating a new drawing document in the user-interface."""
         # return self._instance.PresetNewDrawingParameters
         raise NotImplemented
 
@@ -719,7 +730,8 @@ class ISldWorks:
         raise NotImplemented
 
     def refresh_quick_tip_window(self):
-        """Tells the SOLIDWORKS application that your add-in's state has changed and triggers a query for the current URL page."""
+        """Tells the SOLIDWORKS application that your add-in's state has changed and triggers a query for the current
+        URL page."""
         # return self._instance.RefreshQuickTipWindow
         raise NotImplemented
 
@@ -759,7 +771,8 @@ class ISldWorks:
         raise NotImplemented
 
     def remove_from_popup_menu(self):
-        """Removes the specified menu item from one or all specified context-sensitive menus (also called shortcut menus and pop-up menus) for the specified document types."""
+        """Removes the specified menu item from one or all specified context-sensitive menus (also called shortcut
+        menus and pop-up menus) for the specified document types."""
         # return self._instance.RemoveFromPopupMenu
         raise NotImplemented
 
@@ -794,7 +807,8 @@ class ISldWorks:
         raise NotImplemented
 
     def reset_preset_drawing_parameters(self):
-        """Resets SOLIDWORKS back to its default behavior after calling ISldWorks::PresetNewDrawingParameters (i.e., display Sheet Format/Size dialog when opening a new drawing document)."""
+        """Resets SOLIDWORKS back to its default behavior after calling ISldWorks::PresetNewDrawingParameters
+        (i.e., display Sheet Format/Size dialog when opening a new drawing document)."""
         # return self._instance.ResetPresetDrawingParameters
         raise NotImplemented
 
@@ -844,7 +858,8 @@ class ISldWorks:
         raise NotImplemented
 
     def send_msg_to_user(self):
-        """Displays a message box containing a message to the user, who is required to interact with it before continuing."""
+        """Displays a message box containing a message to the user, who is required to interact with it before
+        continuing."""
         # return self._instance.SendMsgToUser2
         raise NotImplemented
 
@@ -889,7 +904,8 @@ class ISldWorks:
         raise NotImplemented
 
     def set_search_folders(self):
-        """Sets the current folder search path as shown in Tools > Options > System Options > File Locations > Show folders for  > Referenced Documents."""
+        """Sets the current folder search path as shown in Tools > Options > System Options > File Locations > Show
+        folders for  > Referenced Documents."""
         # return self._instance.SetSearchFolders
         raise NotImplemented
 

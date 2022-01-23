@@ -190,12 +190,14 @@ class IModelDoc:
         raise NotImplemented
 
     def create_center_line_v_b(self):
-        """Creates a center line from P1 to P2 and can be used in Visual Basic for Applications (VBA) and other forms of Basic that do not support SafeArrays."""
+        """Creates a center line from P1 to P2 and can be used in Visual Basic for Applications (VBA) and other forms
+        of Basic that do not support SafeArrays."""
         # return self._instance.CreateCenterLineVB
         raise NotImplemented
 
     def create_clipped_splines(self):
-        """Creates one or more sketch spline segments that are clipped against a given (x1, y1), (x2, y2) rectangle. This rectangle lies in the space of the active 2D sketch."""
+        """Creates one or more sketch spline segments that are clipped against a given (x1, y1), (x2, y2) rectangle.
+        This rectangle lies in the space of the active 2D sketch."""
         # return self._instance.CreateClippedSplines
         raise NotImplemented
 
@@ -315,7 +317,8 @@ class IModelDoc:
         raise NotImplemented
 
     def edit_ordinate(self):
-        """Puts the currently selected ordinate dimension into edit mode so you could add more ordinate dimensions to this group."""
+        """Puts the currently selected ordinate dimension into edit mode so you could add more ordinate dimensions to
+        this group."""
         # return self._instance.EditOrdinate
         raise NotImplemented
 
@@ -335,7 +338,8 @@ class IModelDoc:
         raise NotImplemented
 
     def edit_seed_feat(self):
-        """Gets the pattern seed feature, based on the selected face, and displays the Edit Definition dialog for that feature."""
+        """Gets the pattern seed feature, based on the selected face, and displays the Edit Definition dialog for that
+        feature."""
         # return self._instance.EditSeedFeat
         raise NotImplemented
 
@@ -404,10 +408,9 @@ class IModelDoc:
         # return self._instance.FeatureReferenceCurve
         raise NotImplemented
 
-    def file_summary_info(self):
+    def file_summary_info(self, field_id):
         """Displays the File Summary Information dialog box for this file."""
-        # return self._instance.FileSummaryInfo
-        raise NotImplemented
+        return self._instance.SummaryInfo(field_id)
 
     def first_feature(self):
         """Gets the first feature in the document."""
@@ -450,7 +453,8 @@ class IModelDoc:
         return self._instance.ForceRebuild3(arg1)
 
     def force_release_locks(self):
-        """Releases the locks that a file system places on a file when it is opened and detaches that file from the file system."""
+        """Releases the locks that a file system places on a file when it is opened and detaches that file from the
+        file system."""
         # return self._instance.ForceReleaseLocks
         raise NotImplemented
 
@@ -480,7 +484,8 @@ class IModelDoc:
         raise NotImplemented
 
     def get_blocking_state(self):
-        """Gets the current value of the SOLIDWORKS blocking state, within the range of values accessible by IModelDoc2::SetBlockingState."""
+        """Gets the current value of the SOLIDWORKS blocking state, within the range of values accessible by
+        IModelDoc2::SetBlockingState."""
         # return self._instance.GetBlockingState
         raise NotImplemented
 
@@ -500,7 +505,8 @@ class IModelDoc:
         raise NotImplemented
 
     def get_consider_leaders_as_lines(self):
-        """Gets whether the display data of a leader is included as lines when the lines are retrieved from a view or annotation in this document."""
+        """Gets whether the display data of a leader is included as lines when the lines are retrieved from a view or
+        annotation in this document."""
         # return self._instance.GetConsiderLeadersAsLines
         raise NotImplemented
 
@@ -783,7 +789,8 @@ class IModelDoc:
         raise NotImplemented
 
     def multi_select_by_ray(self):
-        """Selects multiple objects of the specified type that are intersected by a ray from point (x,y,z in meters) in direction vector (x,y,z) within a distance radius."""
+        """Selects multiple objects of the specified type that are intersected by a ray from point (x,y,z in meters)
+        in direction vector (x,y,z) within a distance radius."""
         # return self._instance.MultiSelectByRay
         raise NotImplemented
 
@@ -931,7 +938,8 @@ class IModelDoc:
         raise NotImplemented
 
     def select_midpoint(self):
-        """Puts the midpoint (swSelMIDPOINTS) of that edge on the selection list and removes the edge from the selection list when an edge is selected."""
+        """Puts the midpoint (swSelMIDPOINTS) of that edge on the selection list and removes the edge from the
+        selection list when an edge is selected."""
         # return self._instance.SelectMidpoint
         raise NotImplemented
 
@@ -966,7 +974,8 @@ class IModelDoc:
         raise NotImplemented
 
     def set_consider_leaders_as_lines(self):
-        """Sets a flag on the document that indicates whether the display data of a leader should be included as lines when the lines are retrieved from a view or annotation in this document."""
+        """Sets a flag on the document that indicates whether the display data of a leader should be included as lines
+        when the lines are retrieved from a view or annotation in this document."""
         # return self._instance.SetConsiderLeadersAsLines
         raise NotImplemented
 
@@ -1016,7 +1025,8 @@ class IModelDoc:
         raise NotImplemented
 
     def set_save_as_file_name(self):
-        """Sets the Save As filename from within the FileSaveAsNotify2 event handlers, thereby, bypassing the Save As dialog."""
+        """Sets the Save As filename from within the FileSaveAsNotify2 event handlers, thereby, bypassing the Save As
+        dialog."""
         # return self._instance.SetSaveAsFileName
         raise NotImplemented
 
@@ -1276,7 +1286,8 @@ class IModelDoc:
         raise NotImplemented
 
     def version_history(self):
-        """Gets an array of strings indicating the versions in which this document was saved, including the SOLIDWORKS version in which the model document is currently opened and which is the last value returned in the array."""
+        """Gets an array of strings indicating the versions in which this document was saved, including the SOLIDWORKS
+        version in which the model document is currently opened and which is the last value returned in the array."""
         # return self._instance.VersionHistory
         raise NotImplemented
 
@@ -1475,10 +1486,6 @@ class IModelDoc:
         # return self._instance.WindowRedraw
         raise NotImplemented
 
-    # @property
-    def summary_info(self, field_id):
-        # http://help.solidworks.com/2021/english/api/swconst/SOLIDWORKS.Interop.swconst~SOLIDWORKS.Interop.swconst.swSummInfoField_e.html
-        return self._instance.SummaryInfo(field_id)
 
 
 
