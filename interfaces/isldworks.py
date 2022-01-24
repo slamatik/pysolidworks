@@ -14,41 +14,98 @@ class ISldWorks:
 
     @property
     def active_doc(self):
+        """
+        Gets the currently active document.
+        :return: IModelDoc
+        """
         return Doc(self._instance.ActiveDoc)
 
     @property
     def command_in_progress(self):
+        """
+        Improves performance of out-of-process applications by informing SOLIDWORKS that a sequence of API calls will be
+        made by the out-of-process application.
+        :return: bool
+        """
         return self._instance.CommandInProgress
 
     @command_in_progress.setter
     def command_in_progress(self, state):
+        """
+        Improves performance of out-of-process applications by informing SOLIDWORKS that a sequence of API calls will be
+        made by the out-of-process application.
+        :param state: bool
+        :return: None
+        """
         self._instance.CommandInProgress = state
 
     @property
     def enable_background_processing(self):
+        """
+        Gets or sets whether to enable background processing.
+        :return: bool
+        """
         return self._instance.EnableBackgroundProcessing
 
     @enable_background_processing.setter
     def enable_background_processing(self, state):
+        """
+        Gets or sets whether to enable background processing.
+        :param state: bool
+        :return: None
+        """
         self._instance.EnableBackgroundProcessing = state
 
     @property
     def visible(self):
+        """
+        Gets and sets the visibility property of the SOLIDWORKS application.
+        :return: bool
+        """
         return self._instance.Visible
 
     @visible.setter
     def visible(self, state):
+        """
+        Gets and sets the visibility property of the SOLIDWORKS application.
+        :param state: bool
+        :return: bool
+        """
         self._instance.Visible = state
 
-    def activate_doc(self):
-        """Activates a loaded document and rebuilds it as specified."""
-        # return self._instance.ActivateDoc3
-        raise NotImplemented
+    def activate_doc(self, name, use_user_preferences=False, option=2):
+        """
+        Activates a loaded document and rebuilds it as specified.
+        :param name: Name of the loaded document to activate
+        :param use_user_preferences: True to rebuild as per the system option; false to rebuild as per Option
+        :param option: Rebuild option as defined below
+        :return: error? pointer?
 
-    def activate_task_pane(self):
-        """Activates the specified task pane."""
-        # return self._instance.ActivateTaskPane
-        raise NotImplemented
+        1 = do not rebuild the activated document
+        2 = rebuild the activated document
+        0 = prompt the user whether to rebuild the activated document
+        """
+        arg1 = win32.VARIANT(pythoncom.VT_BSTR, name)
+        arg2 = win32.VARIANT(pythoncom.VT_BOOL, use_user_preferences)
+        arg3 = win32.VARIANT(pythoncom.VT_I4, option)
+        arg4 = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
+        self._instance.ActivateDoc3(arg1, arg2, arg3, arg4)
+        return arg4
+        # raise NotImplemented
+
+    def activate_task_pane(self, task_pane_id):
+        """
+        Activates the specified task pane.
+        :param task_pane_id: ID of task pane as defined below
+        :return: bool
+        4 = Clipboard tab
+        5 = Custom Properties tab
+        1 = Design Library tab
+        2 = File Explorer tab
+        6 = P&ID tab
+        3 = SOLIDWORKS Resources tab
+        """
+        return self._instance.ActivateTaskPane(task_pane_id)
 
     def add_callback(self):
         """Registers a general purpose callback handler."""
@@ -139,10 +196,14 @@ class ISldWorks:
         # return self._instance.CheckpointConvertedDocument
         raise NotImplemented
 
-    def close_all_documents(self):
-        """Closes all open documents in the SOLIDWORKS session."""
-        # return self._instance.CloseAllDocuments
-        raise NotImplemented
+    def close_all_documents(self, include_unsaved=False):
+        """
+        Closes all open documents in the SOLIDWORKS session.
+        :param include_unsaved: bool, True = Close all documents, including dirty documents, False = Close all documents,
+        excluding dirty documents
+        :return: bool
+        """
+        return self._instance.CloseAllDocuments(include_unsaved)
 
     def close_and_reopen(self):
         """Closes and reopens the specified drawing document without unloading its references from memory."""
