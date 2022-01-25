@@ -3,6 +3,7 @@ from doc import Doc
 import win32com.client as win32
 import pythoncom
 import os
+import interfaces.ienumdocuments
 
 
 # http://help.solidworks.com/2021/english/api/sldworksapi/SolidWorks.Interop.sldworks~SolidWorks.Interop.sldworks.ISldWorks.html
@@ -91,7 +92,6 @@ class ISldWorks:
         arg4 = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
         self._instance.ActivateDoc3(arg1, arg2, arg3, arg4)
         return arg4
-        # raise NotImplemented
 
     def activate_task_pane(self, task_pane_id):
         """
@@ -164,20 +164,17 @@ class ISldWorks:
         # return self._instance.AddToolbarCommand2
         raise NotImplemented
 
-    def allow_failed_feature_creation(self):
+    def allow_failed_feature_creation(self, yes_no):
         """Sets whether to allow the creation of a feature that has rebuild errors."""
-        # return self._instance.AllowFailedFeatureCreation
-        raise NotImplemented
+        return self._instance.AllowFailedFeatureCreation(yes_no)
 
     def arrange_icons(self):
         """Arranges the icons in SOLIDWORKS."""
-        # return self._instance.ArrangeIcons
-        raise NotImplemented
+        return self._instance.ArrangeIcons
 
     def arrange_windows(self):
         """Arranges the open windows in SOLIDWORKS."""
-        # return self._instance.ArrangeWindows
-        raise NotImplemented
+        return self._instance.ArrangeWindows
 
     def block_skinning(self):
         """Blocks skinning a window, which prevents a window from looking like a SOLIDWORKS window."""
@@ -199,8 +196,8 @@ class ISldWorks:
     def close_all_documents(self, include_unsaved=False):
         """
         Closes all open documents in the SOLIDWORKS session.
-        :param include_unsaved: bool, True = Close all documents, including dirty documents, False = Close all documents,
-        excluding dirty documents
+        :param include_unsaved: bool, True = Close all documents, including dirty documents, False = Close all documents
+        , excluding dirty documents
         :return: bool
         """
         return self._instance.CloseAllDocuments(include_unsaved)
@@ -231,8 +228,7 @@ class ISldWorks:
 
     def create_new_window(self):
         """Creates a client window containing the active document."""
-        # return self._instance.CreateNewWindow
-        raise NotImplemented
+        return self._instance.CreateNewWindow
 
     def create_property_manager_page(self):
         """Creates a PropertyManager page."""
@@ -249,10 +245,9 @@ class ISldWorks:
         # return self._instance.DefineAttribute
         raise NotImplemented
 
-    def display_status_bar(self):
+    def display_status_bar(self, on_off):
         """Sets whether to display the status bar."""
-        # return self._instance.DisplayStatusBar
-        raise NotImplemented
+        self._instance.DisplayStatusBar(on_off)
 
     def document_visible(self):
         """Allows the application to control the display of a document in a window upon creation or retrieval."""
@@ -277,13 +272,13 @@ class ISldWorks:
 
     def enum_documents(self):
         """Gets a list of documents currently open in the application."""
-        # return self._instance.EnumDocuments2
+        # return interfaces.ienumdocuments.IEnumDocuments(self._instance.EnumDocuments2)
         raise NotImplemented
 
     def exit_app(self):
         """Shuts down SOLIDWORKS."""
-        # return self._instance.ExitApp
-        raise NotImplemented
+        return self._instance.ExitApp()
+        # raise NotImplemented
 
     def export_hole_wizard_item(self):
         """Exports data for the specified Hole Wizard standard."""
