@@ -1,0 +1,38 @@
+I'm trying to write a wrapper for SolidWorks API using python. Currently I'm facing a problem in a situations where I need to pass Object to a software. 
+I have existing code that works fine in VBA
+
+    Dim swApp           As SldWorks.SldWorks
+    Dim swModel         As SldWorks.ModelDoc2
+    Set swApp = Application.SldWorks
+    Set swModel = swApp.OpenDoc6(Path & swFileName, swDocDRAWING, swOpenDocOptions_Silent, "", nErrors, nWarnings)
+    Set swExportPDFData = swApp.GetExportFileData(1)
+    swModel.Extension.SaveAs endPath, 0, 0, swExportPDFData, nErrors, nWarnings
+
+So I'm pretty much trying to replicate that but in python. But I think I'm having an issue with swExportPDFData which is an object of IExportPdfData Interface. 
+Documentation says that swExportPDFData is
+
+    IExportPdfData object for exporting drawing sheets to PDF
+
+What I've tried so far
+
+    sw = SldWorks()
+    model = sw.open_doc(file)[0]
+    efd = sw.get_export_file_data() # instance of IExportPdfData
+    efd.view_pdf_after_saving = False
+    model.extension.save_as(name='Test.png', versio=0, options=1, export_data=efd)
+
+Code for save as function:
+
+class IModelDocExtension
+    def __init__(self, parent):
+        self._instance = parent.Extension
+
+
+
+
+<pre>
+http://help.solidworks.com/2021/english/api/sldworksapi/solidworks.interop.sldworks~solidworks.interop.sldworks.isldworks.html?verRedirect=1
+</pre>
+
+
+http://help.solidworks.com/2012/english/api/sldworksapi/SolidWorks.Interop.sldworks~SolidWorks.Interop.sldworks.IModelDocExtension~SaveAs.html

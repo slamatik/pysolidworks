@@ -50,17 +50,22 @@ class SldWorks(ISldWorks):
         df = pd.DataFrame()
         for file in os.listdir(folder):
             if file.endswith('.SLDDRW'):
-                path = os.path.join(folder, file)
-                part_number = file.split('.')[0]
-                # print(path)
-                drawing = self.open_doc(path)
-                model = self.get_model()
-                model_doc_extension = model.extension
-                custom_property_manager = model_doc_extension.custom_property_manager('')
-                properties = np.array(custom_property_manager.get_all())
-                names, values = ['Part Number'] + list(properties[:, 0]), [part_number] + list(properties[:, 2])
-                df = df.append({key: value for key, value in zip(names, values)}, ignore_index=True)
-                self.quit_doc(path)
+                try:
+                    path = os.path.join(folder, file)
+                    part_number = file.split('.')[0]
+                    # print(path)
+                    drawing = self.open_doc(path)[0]
+                    model = self.get_model()
+                    model_doc_extension = drawing.extension
+                    custom_property_manager = model_doc_extension.custom_property_manager('')
+                    properties = np.array(custom_property_manager.get_all())
+                    names, values = ['Part Number'] + list(properties[:, 0]), [part_number] + list(properties[:, 2])
+                    df = df.append({key: value for key, value in zip(names, values)}, ignore_index=True)
+                    self.quit_doc(path)
+                    print(part_number, 'Completed')
+                except Exception as e:
+                    print(e)
+                    continue
         df.to_csv(file_name + '.csv')
 
     def get_from_excel(self):
