@@ -4,6 +4,7 @@ import win32com.client as win32
 import pythoncom
 import os
 import interfaces.ienumdocuments
+import interfaces.iexportpdfdata
 
 
 # http://help.solidworks.com/2021/english/api/sldworksapi/SolidWorks.Interop.sldworks~SolidWorks.Interop.sldworks.ISldWorks.html
@@ -424,10 +425,9 @@ class ISldWorks:
         # return self._instance.GetExecutablePath
         raise NotImplemented
 
-    def get_export_file_data(self):
+    def get_export_file_data(self, file_type=1):
         """Gets the data interface for the specified file type to which to export one or more drawing sheets."""
-        # return self._instance.GetExportFileData
-        raise NotImplemented
+        return interfaces.iexportpdfdata.IExportPdfData(self._instance.GetExportFileData(file_type))
 
     def get_first_document(self):
         """Gets the document opened first in this SOLIDWORKS session."""

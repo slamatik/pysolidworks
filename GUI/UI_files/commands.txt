@@ -1,0 +1,2 @@
+pyuic5 -x main_window.ui -o main_window.py
+pyuic5 -x properties_window.ui -o properties_window.py
