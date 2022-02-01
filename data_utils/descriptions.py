@@ -412,3 +412,4 @@ for i in data.split('\n'):
              f'\traise NotImplemented\n'
     print(result)
     # break
+
