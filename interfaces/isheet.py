@@ -31,7 +31,6 @@ class ISheet:
     def revision_table(self):
         return IRevisionTableAnnotation(self._instance.RevisionTable)
 
-    @property
     def table_anchor(self, table_type):
         return ITableAnchor(self._instance, table_type)
 
@@ -79,7 +78,6 @@ class ISheet:
     def insert_revision_table(self, use_anchor_point=True, x=0.01, y=0.01, anchor_type=3,
                               table_template=r"M:\DESIGN\Solidworks Templates\revision table template 2021.sldrevtbt",
                               shape=1, auto_update_zone_cells=False):
-        # todo
         return IRevisionTableAnnotation(self._instance.InsertRevisionTable2(use_anchor_point, x, y, anchor_type,
                                                                             table_template, shape,
                                                                             auto_update_zone_cells))
