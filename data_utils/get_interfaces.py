@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import os
+import codecs
 
 # update year
 main_link = 'http://help.solidworks.com/2021/english/api/sldworksapi/SolidWorks.Interop.sldworks~SolidWorks.Interop.sldworks.'
@@ -51,53 +52,64 @@ def get_members(link):
 
 
 interfaces = get_interfaces()
-for interface, link in interfaces.items():
-    print(interface)
-    # print(link)
-    members = get_members(link)
-    with open(interface.lower() + '.py', 'w') as file:
-        result = f'# {link}\n' \
-                 f'class {interface}:\n' \
-                 f'\tdef __init__(self, parent=None):\n' \
-                 f'\t\tself._instance = parent\n\n'
-        for method_name, description in members.items():
-            if description.startswith('Obsolete'): continue
-            link_to_method = f'{main_link}{interface}~{method_name}.html'
-            my_method_name = convert_name(method_name, method=True)
-            r = requests.get(link_to_method)
-            soup = BeautifulSoup(r.text, "html.parser")
-            data = soup.find('dl')
-            attributes = True
-            try:
-                dt = data.find_all('dt')
-                dd = data.find_all('dd')
-                dt_str = [i.text for i in dt]
-                dt_str = [convert_name(i, False) for i in dt_str]
-                dd_str = [i.text for i in dd]
-                combined_str = zip(dt_str, dd_str)
-                doc_string = ''
-                for i in combined_str:
-                    doc_string += '\t\t:param ' + ': '.join(i) + '\n'
-            except AttributeError:
-                attributes = False
-                dt_str = ''
+n = len(interfaces)
+for idx, (interface, link) in enumerate(interfaces.items()):
+    try:
+        members = get_members(link)
+        with codecs.open(interface.lower() + '.py', 'w', "utf-8-sig") as file:
+        # with codecs.open(interface.lower() + '.txt', 'w', "utf-8-sig") as file:
+            result = f'# {link}\n' \
+                     f'class {interface}:\n' \
+                     f'\tdef __init__(self, parent=None):\n' \
+                     f'\t\tself._instance = parent\n\n'
+            for method_name, description in members.items():
+                if description.startswith('Obsolete'): continue
+                link_to_method = f'{main_link}{interface}~{method_name}.html'
+                my_method_name = convert_name(method_name, method=True)
+                r = requests.get(link_to_method)
+                soup = BeautifulSoup(r.text, "html.parser")
+                data = soup.find('dl')
+                attributes = True
+                try:
+                    dt = data.find_all('dt')
+                    dd = data.find_all('dd')
+                    dt_str = [i.text for i in dt]
+                    dt_str = [convert_name(i, False) for i in dt_str]
+                    dd_str = [i.text for i in dd]
+                    combined_str = zip(dt_str, dd_str)
+                    doc_string = ''
+                    for i in combined_str:
+                        doc_string += '\t\t:param ' + ': '.join(i) + '\n'
+                except AttributeError:
+                    attributes = False
+                    dt_str = ''
 
-            if attributes:
-                result += f'\tdef {my_method_name}(self, {", ".join(dt_str)}):\n' \
-                          f'\t\t"""\n' \
-                          f'\t\t{description}\n' \
-                          f'{doc_string}' \
-                          f'\t\t"""\n' \
-                          f'\t\t# return self._instance.{method_name}({", ".join(dt_str)})\n'
-            else:
-                result += f'\tdef {my_method_name}(self):\n' \
-                          f'\t\t"""{description}"""\n' \
-                          f'\t\t# return self._instance.{method_name}\n'
-            result += f'\t\traise NotImplemented\n\n'
-            # result = f'class {interface}:\n' \
-            #          f'\tdef __init__(self, parent=None):\n' \
-            #          f'\t\tself._instance = parent\n' + result
-        file.write(result)
+                if attributes:
+                    result += f'\tdef {my_method_name}(self, {", ".join(dt_str)}):\n' \
+                              f'\t\t"""\n' \
+                              f'\t\t{description}\n' \
+                              f'{doc_string}' \
+                              f'\t\t"""\n' \
+                              f'\t\t# return self._instance.{method_name}({", ".join(dt_str)})\n'
+                else:
+                    result += f'\tdef {my_method_name}(self):\n' \
+                              f'\t\t"""{description}"""\n' \
+                              f'\t\t# return self._instance.{method_name}\n'
+                result += f'\t\traise NotImplemented\n\n'
+                result = result.replace("&nbsp", " ")
+                # uni
+                # print(my_method_name)
+                # print(description)
+                # if attributes:
+                #     print(doc_string)
+                # print()
+            # print(result)
+            file.write(result)
         # print(result)
-    file.close()
-    if interface == 'IAdvancedSaveAsOptions': break
+        file.close()
+    except Exception as e:
+        print(e, interface, sep='\n')
+    print(idx + 1, 'completed')
+    if idx + 1 == 100: break
+    # if interface == 'IAdvancedSaveAsOptions': break
+# 100 completed
