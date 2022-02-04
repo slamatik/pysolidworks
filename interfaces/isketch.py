@@ -1,8 +1,19 @@
-# http://help.solidworks.com/2021/english/api/sldworksapi/SOLIDWORKS.Interop.sldworks~SOLIDWORKS.Interop.sldworks.ISketch.html
-# todo
+# http://help.solidworks.com/2021/english/api/sldworksapi/SolidWorks.Interop.sldworks~SolidWorks.Interop.sldworks.ISketch_members.html
 class ISketch:
     def __init__(self, system_object=None):
         self._instance = system_object
+
+    def model_to_sketch_transform(self):
+        """Gets the model-to-sketch transform for this sketch.
+        NOTE: This property is a get-only property. Set is not implemented."""
+        # return self._instance.ModelToSketchTransform
+        raise NotImplemented
+
+    def relation_manager(self):
+        """Gets the sketch relation manager.
+        NOTE: This property is a get-only property. Set is not implemented."""
+        # return self._instance.RelationManager
+        raise NotImplemented
 
     def check_feature_use(self, feature_type, open_count, closed_count):
         """

@@ -13,7 +13,7 @@ class SldWorks(ISldWorks):
     def __init__(self):
         super().__init__()
 
-    # def close_doc(self, name):
+    # def close_doc(self, name):+
     #     self._instance.CloseDoc(name)
     #
     # def open_doc(self, file_name, options=1, configuration=str()):

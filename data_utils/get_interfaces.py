@@ -54,16 +54,21 @@ def get_members(link):
 interfaces = get_interfaces()
 n = len(interfaces)
 for idx, (interface, link) in enumerate(interfaces.items()):
+    # if idx + 1 > 219:
     try:
+        gettr_settr = False
         members = get_members(link)
         with codecs.open(interface.lower() + '.py', 'w', "utf-8-sig") as file:
-        # with codecs.open(interface.lower() + '.txt', 'w', "utf-8-sig") as file:
+            # with codecs.open(interface.lower() + '.txt', 'w', "utf-8-sig") as file:
             result = f'# {link}\n' \
                      f'class {interface}:\n' \
                      f'\tdef __init__(self, parent=None):\n' \
                      f'\t\tself._instance = parent\n\n'
             for method_name, description in members.items():
                 if description.startswith('Obsolete'): continue
+                if 'Gets or sets' in description: gettr_settr = True
+                # print(description)
+                # print(gettr_settr)
                 link_to_method = f'{main_link}{interface}~{method_name}.html'
                 my_method_name = convert_name(method_name, method=True)
                 r = requests.get(link_to_method)
@@ -84,19 +89,31 @@ for idx, (interface, link) in enumerate(interfaces.items()):
                     attributes = False
                     dt_str = ''
 
-                if attributes:
-                    result += f'\tdef {my_method_name}(self, {", ".join(dt_str)}):\n' \
-                              f'\t\t"""\n' \
-                              f'\t\t{description}\n' \
-                              f'{doc_string}' \
-                              f'\t\t"""\n' \
-                              f'\t\t# return self._instance.{method_name}({", ".join(dt_str)})\n'
-                else:
-                    result += f'\tdef {my_method_name}(self):\n' \
+                if gettr_settr:
+                    result += f'\t@property\n' \
+                              f'\tdef {my_method_name}(self):\n' \
                               f'\t\t"""{description}"""\n' \
-                              f'\t\t# return self._instance.{method_name}\n'
-                result += f'\t\traise NotImplemented\n\n'
-                result = result.replace("&nbsp", " ")
+                              f'\t\treturn self._instance.{method_name}\n' \
+                              f'\n' \
+                              f'\t@{my_method_name}.setter\n' \
+                              f'\tdef {my_method_name}(self, value):\n' \
+                              f'\t\t"""{description}"""\n' \
+                              f'\t\tself._instance.{method_name} = value\n\n'
+
+                else:
+                    if attributes:
+                        result += f'\tdef {my_method_name}(self, {", ".join(dt_str)}):\n' \
+                                  f'\t\t"""\n' \
+                                  f'\t\t{description}\n' \
+                                  f'{doc_string}' \
+                                  f'\t\t"""\n' \
+                                  f'\t\t# return self._instance.{method_name}({", ".join(dt_str)})\n'
+                    else:
+                        result += f'\tdef {my_method_name}(self):\n' \
+                                  f'\t\t"""{description}"""\n' \
+                                  f'\t\t# return self._instance.{method_name}\n'
+                    result += f'\t\traise NotImplemented\n\n'
+                    result = result.replace("&nbsp", " ")
                 # uni
                 # print(my_method_name)
                 # print(description)
@@ -110,6 +127,9 @@ for idx, (interface, link) in enumerate(interfaces.items()):
     except Exception as e:
         print(e, interface, sep='\n')
     print(idx + 1, 'completed')
-    if idx + 1 == 100: break
-    # if interface == 'IAdvancedSaveAsOptions': break
+    # print(result)
+    # if idx == 3: break
+
+# if idx + 1 == 100: break
+# if interface == 'IAdvancedSaveAsOptions': break
 # 100 completed

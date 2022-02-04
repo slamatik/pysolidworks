@@ -4,6 +4,7 @@ from .imodeldocextension import IModelDocExtension
 from .ifeaturemanager import IFeatureManager
 from interfaces.imodelview import IModelView
 from interfaces.iselectionmgr import ISelectionMgr
+from interfaces.ipagesetup import IPageSetup
 import win32com.client as win32
 import pythoncom
 
@@ -49,6 +50,11 @@ class IModelDoc:
     @material_user_name.setter
     def material_user_name(self, value):
         self._instance.MaterialUserName = value
+
+    @property
+    def page_setup(self):
+        """Gets the page setup for this document."""
+        return IPageSetup(self._instance.PageSetup)
 
     @property
     def selection_manager(self):
