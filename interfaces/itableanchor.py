@@ -5,10 +5,8 @@ from interfaces.ifeature import IFeature
 # http://help.solidworks.com/2021/english/api/sldworksapi/SolidWorks.Interop.sldworks~SolidWorks.Interop.sldworks.ITableAnchor_members.html
 
 class ITableAnchor:
-    def __init__(self, parent, table_type):
-        """Gets or sets the location of the table anchor."""
-        # todo enum
-        self._instance = parent.TableAnchor(table_type)
+    def __init__(self, parent=None):
+        self._instance = parent
 
     @property
     def position(self):

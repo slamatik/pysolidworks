@@ -3,7 +3,7 @@ import pandas as pd
 from interfaces.isldworks import ISldWorks
 from doc import Doc
 import win32com.client as win32
-from interfaces.imodeldoc import IModelDoc
+from interfaces.imodeldoc2 import IModelDoc
 import os
 import pythoncom
 import numpy as np

@@ -25,7 +25,7 @@ class IModelDoc:
 
     @property
     def extension(self):
-        return IModelDocExtension(self._instance)
+        return IModelDocExtension(self._instance.Extension)
 
     @property
     def feature_manager(self):
@@ -905,7 +905,7 @@ class IModelDoc:
         arg1 = win32.VARIANT(pythoncom.VT_I4, options)
         arg2 = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
         arg3 = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, None)
-        self._instance().Save3(arg1, arg2, arg3)
+        self._instance.Save3(arg1, arg2, arg3)
         return arg2.value, arg3.value
 
     def save_b_m_p(self):
@@ -1491,7 +1491,3 @@ class IModelDoc:
         """Redraws the current window."""
         # return self._instance.WindowRedraw
         raise NotImplemented
-
-
-
-

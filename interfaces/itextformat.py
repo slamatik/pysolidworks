@@ -1,9 +1,11 @@
 import win32com.client as win32
+
+
 # http://help.solidworks.com/2021/english/api/sldworksapi/SolidWorks.Interop.sldworks~SolidWorks.Interop.sldworks.ITextFormat_members.html
 
 
 class ITextFormat:
-    def __init__(self, parent):
+    def __init__(self, parent=None):
         self._instance = parent
 
     @property

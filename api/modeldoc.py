@@ -1,4 +1,4 @@
-from interfaces.imodeldoc import IModelDoc
+from interfaces.imodeldoc2 import IModelDoc
 
 
 class ModelDoc(IModelDoc):

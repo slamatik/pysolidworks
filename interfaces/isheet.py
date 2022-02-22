@@ -62,8 +62,18 @@ class ISheet:
         """
         Gets the specified table anchor.
         :param table_type: Table type as defined in swTableAnnotationType_e
+        swTableAnnotation_General = 0
+        swTableAnnotation_HoleChart = 1
+        swTableAnnotation_BillOfMaterials = 2
+        swTableAnnotation_RevisionBlock = 3
+        swTableAnnotation_WeldmentCutList = 4
+        swTableAnnotation_TitleBlock = 5
+        swTableAnnotation_WeldTable = 6
+        swTableAnnotation_BendTable = 7
+        swTableAnnotation_PunchTable = 8
+        swTableAnnotation_GeneralTolerance = 9
         """
-        return ITableAnchor(self._instance, table_type)
+        return ITableAnchor(self._instance.TableAnchor(table_type))
 
     @property
     def title_block(self):

@@ -1,4 +1,4 @@
-from .imodeldoc import IModelDoc
+from .imodeldoc2 import IModelDoc
 
 
 class IAssemblyDoc(IModelDoc):

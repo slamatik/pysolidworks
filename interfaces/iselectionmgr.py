@@ -61,7 +61,8 @@ class ISelectionMgr:
     def de_select(self, at_index, mark):
         """
         Deselects the specified entity.
-        :param at_index: Index position within the current list of selected items where index ranges from 1 to ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
+        :param at_index: Index position within the current list of selected items where index ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
         :param mark:
         -1 = All selections regardless of marks
 
@@ -91,7 +92,8 @@ class ISelectionMgr:
     def get_selected_object(self, index, mark):
         """
         Gets the selected object.
-        :param index: Index position within the current list of selected items, where Index ranges from 1 to ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
+        :param index: Index position within the current list of selected items, where Index ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
         :param mark:
         -1 = All selections regardless of marks
 
@@ -117,7 +119,8 @@ class ISelectionMgr:
     def get_selected_object_loop(self, index, mark):
         """
         Gets the loop, if selected, for the selected edge.
-        :param index: Index position within the current list of selected items, where AtIndex ranges from 1 to ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
+        :param index: Index position within the current list of selected items, where AtIndex ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
         :param mark:
         -1 = All selections regardless of marks
 
@@ -131,7 +134,8 @@ class ISelectionMgr:
     def get_selected_object_mark(self, at_index):
         """
         Gets the value of the mark for the specified selection.
-        :param at_index: Index position within the current list of selected items where AtIndex ranges from 1 to ISelectionMgr::GetSelectedObjectCount2
+        :param at_index: Index position within the current list of selected items where AtIndex ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2
         """
         # return self._instance.GetSelectedObjectMark(at_index)
         raise NotImplemented
@@ -139,7 +143,8 @@ class ISelectionMgr:
     def get_selected_objects_component(self, index, mark):
         """
         Gets the selected component in an assembly or drawing.
-        :param index: Index position within the current list of selected items, where the index ranges from 1 to ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
+        :param index: Index position within the current list of selected items, where the index ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
         :param mark:
         -1 = All selections regardless of marks
 
@@ -153,7 +158,8 @@ class ISelectionMgr:
     def get_selected_objects_drawing_view(self, index, mark):
         """
         Gets the drawing view for the selected object.
-        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
+        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
         :param mark:
         -1 = All selections regardless of marks
 
@@ -167,7 +173,8 @@ class ISelectionMgr:
     def get_selected_objects_face(self, at_index, mark):
         """
         Gets the face of the specified selection if the specified selection is a silhouette edge.
-        :param at_index: Index position within the current list of selected items, where AtIndex ranges from 1 to ISelectionMgr::GetSelectedObjectCount2
+        :param at_index: Index position within the current list of selected items, where AtIndex ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2
         :param mark:
         1 = All selections regardless of marks
 
@@ -181,7 +188,8 @@ class ISelectionMgr:
     def get_selected_object_type(self, index, mark):
         """
         Gets the type of object selected.
-        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
+        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
         :param mark:
         -1 = All selections regardless of marks
 
@@ -195,7 +203,8 @@ class ISelectionMgr:
     def get_selection_point(self, index, mark):
         """
         Gets the selected point in model space coordinates from the currently selected object.
-        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
+        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
         :param mark:
         -1 = All selections regardless of marks
 
@@ -209,7 +218,8 @@ class ISelectionMgr:
     def get_selection_point_in_sketch_space(self, index, mark):
         """
         Gets the selection point projected on to the active sketch and returned in sketch space.
-        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
+        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
         :param mark:
         -1 = All selections regardless of marks
         0 = only the selections without marks
@@ -221,13 +231,13 @@ class ISelectionMgr:
     def get_selection_specification(self, index, select_by_string, object_type, type, x, y, z):
         """
         Gets the selection specification at the specified index of the current selection list.
-        :param index: 1 <= Index in the current list of selected items <= ISelectionMgr::GetSelectedObjectCount2
+        :param index: 1 <= Index in the current list of selected items <= ISelectionMgr::GetSelectedObjectCount2
         :param select_by_string: Feature name of object at Index; "" if object is not a feature
         :param object_type: Type of object at Index
         :param type: Type of object at Index as defined in swSelectType_e
         :param x: X coordinate of object at Index; 0 if SelectByString is not ""
         :param y: Y coordinate of object at Index; 0 if SelectByString is not ""
-        :param z: Z coordinate of object at Index; 0 if SelectByString is not ""
+        :param z: Z coordinate of object at Index; 0 if SelectByString is not ""
         """
         # return self._instance.GetSelectionSpecification(index, select_by_string, object_type, type, x, y, z)
         raise NotImplemented
@@ -236,7 +246,8 @@ class ISelectionMgr:
         """
         Deselects the specified entity.
         :param count: Number of objects to deselect
-        :param at_index: Index position within the current list of selected items where index ranges from 1 to ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
+        :param at_index: Index position within the current list of selected items where index ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
         :param mark:
         -1 = All selections regardless of marks
 
@@ -250,7 +261,8 @@ class ISelectionMgr:
     def i_get_selection_point(self, index, mark):
         """
         Gets the selected point in model space coordinates from the currently selected object.
-        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
+        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
         :param mark:
         -1 = All selections regardless of marks
 
@@ -264,7 +276,8 @@ class ISelectionMgr:
     def i_get_selection_point_in_sketch_space(self, index, mark):
         """
         Gets the selection point projected on to the active sketch and returned in sketch space.
-        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
+        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
         :param mark:
         -1 = All selections regardless of marks
         0 = only the selections without marks
@@ -276,7 +289,8 @@ class ISelectionMgr:
     def is_in_edit_target(self, index, mark):
         """
         Gets whether the selected object is in the edit target.
-        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
+        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
         :param mark:
         -1 = All selections regardless of marks
 
@@ -290,7 +304,8 @@ class ISelectionMgr:
     def resume_selection_list(self, append):
         """
         Reinstates the previously suspended selection list.
-        :param append: True to append the new selection list to the suspended selection list and resume the combined selection list, false to just resume the suspended selection list
+        :param append: True to append the new selection list to the suspended selection list and resume the combined
+        selection list, false to just resume the suspended selection list
         """
         # return self._instance.ResumeSelectionList2(append)
         raise NotImplemented
@@ -307,8 +322,9 @@ class ISelectionMgr:
     def set_selected_object_mark(self, at_index, mark, action):
         """
         Sets the mark value for the specified selection.
-        :param at_index: 1 <= Index position within the current list of selected items <= ISelectionMgr::GetSelectedObjectCount2
-        :param mark: Number to use as a mark for the selected item; this number is used by certain API functions that require ordered entity selection
+        :param at_index: 1 <= Index position within the current list of selected items <= ISelectionMgr::GetSelectedObjectCount2
+        :param mark: Number to use as a mark for the selected item; this number is used by certain API functions that
+        require ordered entity selection
         :param action: Action to take as defined in swSelectionMarkAction_e
         """
         # return self._instance.SetSelectedObjectMark(at_index, mark, action)
@@ -317,7 +333,8 @@ class ISelectionMgr:
     def set_selection_point(self, index, mark, x, y, z):
         """
         Sets the selection point in model space.
-        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
+        :param index: Index position with in the current list of selected items, where AtIndex ranges from 1 to
+        ISelectionMgr::GetSelectedObjectCount2 (see Remarks)
         :param mark:
         -1 = All selections regardless of marks
 

@@ -104,15 +104,18 @@ class ITableAnnotation:
         # return self._instance.StopAutoSplitting
         raise NotImplemented
 
-    def text(self, row, column, include_hidden):
+    def text(self, row, column, include_hidden=True, value=None):
         """
         Gets or sets the parametrized string of text for the specified cell of this table.
         :param row: Index of the row
         :param column: Index of the column
         :param include_hidden: True to get or set text in the hidden cell, false to not
+        :param value:
         """
-        # return self._instance.Text2(row, column, include_hidden)
-        raise NotImplemented
+        if value:
+            self._instance.Text2(row, column, include_hidden, value)
+        else:
+            return self._instance.Text2(row, column, include_hidden)
 
     def text_horizontal_justification(self):
         """Gets or sets the horizontal justification setting for the text in this table."""
@@ -225,7 +228,8 @@ class ITableAnnotation:
         :param row: 0-based index of the cell row; valid only if AllCells is set to false
         :param column: 0-based index of the cell column; valid only if AllCells is set to false
         :param include_hidden: True to include hidden rows and columns in Row and Column indexes, false to not
-        :param all_cells: True to get the orientation in all cells, false to not; if false, set Row and Column (see Remarks)
+        :param all_cells: True to get the orientation in all cells, false to not; if false, set Row and Column
+        (see Remarks)
         """
         # return self._instance.GetCellTextOrientation(row, column, include_hidden, all_cells)
         raise NotImplemented
@@ -340,7 +344,8 @@ class ITableAnnotation:
         Starts the automatic horizontal splitting of this table using the specified options.
         :param max_number_of_rows: Maximum number of rows in the split portions
         :param apply: How often to horizontally split the table as defined in swHorizontalAutoSplitApply_e
-        :param placement_of_new_split_tables: Where to place the horizontally split table as defined in swHorizontalAutoSplitPlacementOfSplitTable_e
+        :param placement_of_new_split_tables: Where to place the horizontally split table as defined in
+        swHorizontalAutoSplitPlacementOfSplitTable_e
         """
         # return self._instance.HorizontalAutoSplit(max_number_of_rows, apply, placement_of_new_split_tables)
         raise NotImplemented
@@ -360,7 +365,7 @@ class ITableAnnotation:
         """
         Inserts a row into this table.
         :param where: Where to insert the new row as defined in swTableItemInsertPosition_e
-        :param index: Index of row where to insert new row (see Remarks)
+        :param index: Index of row where to insert new row (see Remarks)
         """
         # return self._instance.InsertRow(where, index)
         raise NotImplemented
@@ -368,10 +373,10 @@ class ITableAnnotation:
     def is_cell_merged(self, row, column, with_row, with_column):
         """
         Gets whether the specified cell is merged with other cells.
-        :param row: Index of the row of the first cell to see if it's merged
+        :param row: Index of the row of the first cell to see if it's merged
         :param column: Index of the column of the first cell to see if it's merged
-        :param with_row: Index of the row of the second cell with which the first cell is merged
-        :param with_column: Index of the column of the second cell with which the first cell is merged
+        :param with_row: Index of the row of the second cell with which the first cell is merged
+        :param with_column: Index of the column of the second cell with which the first cell is merged
         """
         # return self._instance.IsCellMerged(row, column, with_row, with_column)
         raise NotImplemented
@@ -379,8 +384,8 @@ class ITableAnnotation:
     def is_cell_text_editable(self, row, column):
         """
         Gets whether the text in this cell can be edited.
-        :param row: Index of row in which cell resides
-        :param column: Index of column in which cell resides
+        :param row: Index of row in which cell resides
+        :param column: Index of column in which cell resides
         """
         # return self._instance.IsCellTextEditable(row, column)
         raise NotImplemented
@@ -396,10 +401,10 @@ class ITableAnnotation:
     def merge_cells(self, row_start, column_start, row_end, column_end):
         """
         Merges the cells in the specified range.
-        :param row_start: Index of row at which start the merge
-        :param column_start: Index of column at which to start the merge
-        :param row_end: Index of row at which to end the merge
-        :param column_end: Index of column at which to end the merge
+        :param row_start: Index of row at which start the merge
+        :param column_start: Index of column at which to start the merge
+        :param row_end: Index of row at which to end the merge
+        :param column_end: Index of column at which to end the merge
         """
         # return self._instance.MergeCells(row_start, column_start, row_end, column_end)
         raise NotImplemented
@@ -407,9 +412,9 @@ class ITableAnnotation:
     def move_column(self, source, where, destination):
         """
         Moves a column in this table annotation.
-        :param source: Index of column to move
+        :param source: Index of column to move
         :param where: Position where to move Source relative to Destination as defined by swTableItemInsertPosition_e
-        :param destination: Index of column where to move Source
+        :param destination: Index of column where to move Source
         """
         # return self._instance.MoveColumn(source, where, destination)
         raise NotImplemented
@@ -417,9 +422,10 @@ class ITableAnnotation:
     def move_row(self, source, where, destination):
         """
         Moves a row in this table either up one row or down one row.
-        :param source: Index of row to move
+        :param source: Index of row to move
         :param where: Position where to move Source relative to Destination as defined by swTableItemInsertPosition_e
-        :param destination: Index of row where to move Source, which is either 1 greater than the Source or 1 less than Source
+        :param destination: Index of row where to move Source, which is either 1 greater than the Source or 1 less than
+        Source
         """
         # return self._instance.MoveRow(source, where, destination)
         raise NotImplemented
@@ -434,7 +440,8 @@ class ITableAnnotation:
 
     def save_as_template(self, file_name):
         """
-        Saves the format of this table as a template file, which you can then use to create other tables of the same type and that look the same.
+        Saves the format of this table as a template file, which you can then use to create other tables of the same
+        type and that look the same.
         :param file_name: Full path and filename to which to save the table template file (see Remarks)
         """
         # return self._instance.SaveAsTemplate(file_name)
@@ -444,7 +451,8 @@ class ITableAnnotation:
         """
         Saves this table to a text data file.
         :param file_name: Full path and filename of text data file (see Remarks)
-        :param separator: Character or string to use to separate each of the text within each of the cells in the table in the text file (see Remarks)
+        :param separator: Character or string to use to separate each of the text within each of the cells in the table
+        in the text file (see Remarks)
         :param include_hidden: True to include text in hidden cells, false to not
         """
         # return self._instance.SaveAsText2(file_name, separator, include_hidden)
@@ -494,7 +502,7 @@ class ITableAnnotation:
         :param column: 0-based index of column; valid only if AllCells is set to false
         :param include_hidden: True to include hidden rows and columns in the Row and Column indexes, false to not
         :param all_cells: True for all cells, false if not; if false, set Row and Column
-        :param orientation: Text orientation as defined in swTableCellOrientation_e (see Remarks)
+        :param orientation: Text orientation as defined in swTableCellOrientation_e (see Remarks)
         """
         # return self._instance.SetCellTextOrientation(row, column, include_hidden, all_cells, orientation)
         raise NotImplemented
@@ -502,7 +510,7 @@ class ITableAnnotation:
     def set_column_title(self, index, title, include_hidden):
         """
         Sets the title of the specified column.
-        :param index: Index of the column whose title to set
+        :param index: Index of the column whose title to set
         :param title: Column title
         :param include_hidden: True to set the hidden column title, false to not
         """
@@ -513,7 +521,7 @@ class ITableAnnotation:
         """
         Sets the type and property data for the specified BOM table column.
         :param index: 0-based index of the column whose type to set
-        :param column_type: Type of column as defined in swTableColumnTypes_e (see Remarks)
+        :param column_type: Type of column as defined in swTableColumnTypes_e (see Remarks)
         :param include_hidden: True to include hidden columns in Index, false to not
         :param property_data: Property data specific to ColumnType (see Remarks)
         """
@@ -525,7 +533,8 @@ class ITableAnnotation:
         Sets the width of the specified column in this table.
         :param index: Index of column for which to set the width
         :param width: Width at which to set specified column, in system units
-        :param options: Table's behavior after changing column width as defined by swTableRowColSizeChangeBehavior_e (see Remarks)
+        :param options: Table's behavior after changing column width as defined by swTableRowColSizeChangeBehavior_e
+        #(see Remarks)
         """
         # return self._instance.SetColumnWidth(index, width, options)
         raise NotImplemented
@@ -562,7 +571,8 @@ class ITableAnnotation:
         Sets the height of the specified row in this table.
         :param index: Index of row for which to set height
         :param height: Height at which to set specified row, in system units
-        :param options: Table's behavior after changing row as defined by swTableRowColSizeChangeBehavior_e (see Remarks)
+        :param options: Table's behavior after changing row as defined by swTableRowColSizeChangeBehavior_e
+        (see Remarks)
         """
         # return self._instance.SetRowHeight(index, height, options)
         raise NotImplemented
